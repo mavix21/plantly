@@ -1,12 +1,13 @@
 {
   "expo": {
-    "scheme": "acme",
+    "scheme": "plantly",
     "userInterfaceStyle": "automatic",
     "orientation": "default",
     "web": {
       "output": "static"
     },
     "name": "plantly",
-    "slug": "plantly"
+    "slug": "plantly",
+    "plugins": ["expo-router"]
   }
 }
