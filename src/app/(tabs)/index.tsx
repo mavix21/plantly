@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   return (
-    <View className="flex-1 items-center justify-center bg-white px-8 dark:bg-black">
+    <View className="bg-background flex-1 items-center justify-center px-8">
       {/* Heading */}
       <Text className="mb-3 text-4xl font-extrabold tracking-tight text-gray-800 dark:text-white">
         🚀 Welcome

@@ -1,15 +1,13 @@
 import { Redirect, Tabs } from "expo-router";
 import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
-import { useSelector } from "@xstate/store/react";
 import { useCSSVariable } from "uniwind";
 
-import { userStore } from "@/src/store/userStore";
+import { useUserStore } from "@/src/store/userStore";
 
 export default function Layout() {
-  const hasFinishedOnboarding = useSelector(
-    userStore,
-    (state) => state.context.hasFinishedOnboarding,
+  const hasFinishedOnboarding = useUserStore(
+    (state) => state.hasFinishedOnboarding,
   );
   const primaryColor = useCSSVariable("--color-primary") as string;
 

@@ -1,11 +1,13 @@
 import { Button, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
-import { userStore } from "@/src/store/userStore";
+import { useUserStore } from "@/src/store/userStore";
 
 export default function App() {
+  const toggle = useUserStore((state) => state.toggleHadOnboarded);
+
   return (
-    <View className="flex-1 items-center justify-center bg-white px-8 dark:bg-black">
+    <View className="bg-background flex-1 items-center justify-center px-8">
       {/* Heading */}
       <Text className="mb-3 text-4xl font-extrabold tracking-tight text-gray-800 dark:text-white">
         🚀 Welcome
@@ -19,10 +21,7 @@ export default function App() {
         </Text>
       </Text>
 
-      <Button
-        onPress={() => userStore.trigger.toggle()}
-        title="Back to onboarding"
-      />
+      <Button onPress={() => toggle()} title="Back to onboarding" />
 
       {/* Instruction text */}
       <Text className="max-w-sm text-center text-base text-gray-600 dark:text-white">

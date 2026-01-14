@@ -1,18 +1,20 @@
 import * as React from "react";
-import { Button, Text, View } from "react-native";
+import { Button, View } from "react-native";
 import { useRouter } from "expo-router";
 
-import { userStore } from "../store/userStore";
+import { useUserStore } from "../store/userStore";
 
 export default function Onboarding() {
+  const toggle = useUserStore((state) => state.toggleHadOnboarded);
   const router = useRouter();
+
   const handlePress = React.useCallback(() => {
-    userStore.trigger.toggle();
+    toggle();
     router.replace("/");
-  }, [router]);
+  }, [toggle, router]);
 
   return (
-    <View className="flex-1 items-center justify-center">
+    <View className="bg-background flex-1 items-center justify-center">
       <Button title="Let me in!" onPress={handlePress} />
     </View>
   );
