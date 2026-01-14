@@ -3,7 +3,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
 import { useCSSVariable } from "uniwind";
 
-import { useUserStore } from "@/src/store/userStore";
+import { useUserStore } from "@/store/userStore";
 
 export default function Layout() {
   const hasFinishedOnboarding = useUserStore(

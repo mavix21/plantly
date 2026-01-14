@@ -1,7 +1,8 @@
-import { Button, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
-import { useUserStore } from "@/src/store/userStore";
+import PlantlyButton from "@/components/PlantlyButton";
+import { useUserStore } from "@/store/userStore";
 
 export default function App() {
   const toggle = useUserStore((state) => state.toggleHadOnboarded);
@@ -21,7 +22,7 @@ export default function App() {
         </Text>
       </Text>
 
-      <Button onPress={() => toggle()} title="Back to onboarding" />
+      <PlantlyButton onPress={() => toggle()} title="Back to onboarding" />
 
       {/* Instruction text */}
       <Text className="max-w-sm text-center text-base text-gray-600 dark:text-white">

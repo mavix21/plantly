@@ -1,16 +1,25 @@
 @import "tailwindcss";
 @import "uniwind";
 
-@layer theme {
-  @variant dark {
-    --color-background: oklch(0.141 0.005 285.823);
-    --color-foreground: oklch(0.985 0 0);
-    --color-primary: #29b365;
-  }
+@theme static {
+  --color-apple-green: #a0d36c;
+  --color-lime-green: #d0e57e;
+}
 
-  @variant light {
-    --color-background: oklch(1 0 0);
-    --color-foreground: oklch(0.141 0.005 285.823);
-    --color-primary: #29b365;
+@layer theme {
+  :root {
+    @variant dark {
+      --color-background: oklch(0.141 0.005 285.823);
+      --color-foreground: oklch(0.985 0 0);
+      --color-primary: #29b365;
+      --color-secondary: #206a42;
+    }
+
+    @variant light {
+      --color-background: oklch(1 0 0);
+      --color-foreground: oklch(0.141 0.005 285.823);
+      --color-primary: #29b365;
+      --color-secondary: #206a42;
+    }
   }
 }
