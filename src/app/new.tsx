@@ -1,6 +1,14 @@
 import * as React from "react";
-import { Alert, Text, TextInput, View } from "react-native";
+import {
+  Alert,
+  Platform,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
 
 import PlantlyButton from "@/components/PlantlyButton";
@@ -12,6 +20,7 @@ interface NewPlantProps {
 }
 
 export default function NewPlant({ propName }: NewPlantProps) {
+  const [imageUri, setImageUri] = React.useState<string | undefined>(undefined);
   const [name, setName] = React.useState<string>();
   const [days, setDays] = React.useState<string>();
   const addPlant = usePlantStore((s) => s.addPlant);
@@ -36,8 +45,24 @@ export default function NewPlant({ propName }: NewPlantProps) {
       );
     }
 
-    addPlant(name, Number(days));
+    addPlant(name, Number(days), imageUri);
     router.navigate("../");
+  };
+
+  const handleChooseImage = async () => {
+    if (Platform.OS === "web") return;
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images"],
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      console.log(result.assets[0]);
+      setImageUri(result.assets[0].uri);
+    }
   };
 
   return (
@@ -46,9 +71,13 @@ export default function NewPlant({ propName }: NewPlantProps) {
       contentContainerClassName="flex-1 pt-8 px-8 pb-16 justify-between"
       keyboardShouldPersistTaps="handled"
     >
-      <View className="items-center">
-        <PlantlyImage />
-      </View>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        className="items-center"
+        onPress={handleChooseImage}
+      >
+        <PlantlyImage imageUri={imageUri} />
+      </TouchableOpacity>
       <View className="gap-6">
         <View className="gap-2">
           <Text>Name</Text>

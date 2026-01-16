@@ -1,3 +1,4 @@
+import * as FileSystem from "expo-file-system/legacy";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
@@ -7,12 +8,17 @@ export type PlantType = {
   name: string;
   wateringFrequencyDays: number;
   lastWateredAtTimestamp?: number;
+  imageUri?: string;
 };
 
 type PlantsState = {
   nextId: number;
   plants: PlantType[];
-  addPlant: (name: string, wateringFrequencyDays: number) => void;
+  addPlant: (
+    name: string,
+    wateringFrequencyDays: number,
+    imageUri?: string,
+  ) => Promise<void>;
   removePlant: (plantId: string) => void;
   waterPlant: (plantId: string) => void;
 };
@@ -22,8 +28,23 @@ export const usePlantStore = create(
     (set) => ({
       plants: [],
       nextId: 1,
-      addPlant: (name: string, wateringFrequencyDays: number) => {
-        return set((state) => {
+      addPlant: async (
+        name: string,
+        wateringFrequencyDays: number,
+        imageUri,
+      ) => {
+        const savedImageUri =
+          FileSystem.documentDirectory +
+          `${new Date().getTime()}-${imageUri?.split("/").slice(-1)[0]}`;
+
+        if (imageUri) {
+          await FileSystem.copyAsync({
+            from: imageUri,
+            to: savedImageUri,
+          });
+        }
+
+        set((state) => {
           return {
             ...state,
             nextId: state.nextId + 1,
@@ -32,6 +53,7 @@ export const usePlantStore = create(
                 id: String(state.nextId),
                 name,
                 wateringFrequencyDays,
+                imageUri: imageUri ? savedImageUri : undefined,
               },
               ...state.plants,
             ],
@@ -39,7 +61,7 @@ export const usePlantStore = create(
         });
       },
       removePlant: (plantId: string) => {
-        return set((state) => {
+        set((state) => {
           return {
             ...state,
             plants: state.plants.filter((plant) => plant.id !== plantId),
@@ -47,7 +69,7 @@ export const usePlantStore = create(
         });
       },
       waterPlant: (plantId: string) => {
-        return set((state) => {
+        set((state) => {
           return {
             ...state,
             plants: state.plants.map((plant) => {

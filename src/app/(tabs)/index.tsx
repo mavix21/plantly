@@ -11,8 +11,8 @@ export default function App() {
 
   return (
     <FlatList
-      className="bg-background"
-      contentContainerClassName="flex-1 p-4"
+      className="bg-background flex-1 pb-24"
+      contentContainerClassName="p-4"
       data={plants}
       renderItem={({ item }) => <PlantCard plant={item} />}
       ListEmptyComponent={
