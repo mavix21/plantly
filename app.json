@@ -1,15 +1,29 @@
 {
   "expo": {
+    "name": "Plantly",
+    "slug": "plantly",
     "scheme": "plantly",
+    "version": "1.0.0",
     "userInterfaceStyle": "automatic",
     "orientation": "default",
+    "icon": "./src/assets/icon.png",
     "web": {
       "output": "static"
     },
-    "name": "plantly",
-    "slug": "plantly",
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#9CF089",
+          "image": "./assets/splash-image.png",
+          "dark": {
+            "image": "./assets/splash-image.png",
+            "backgroundColor": "#56A082"
+          },
+          "imageWidth": 150
+        }
+      ]
     ],
     "ios": {
       "bundleIdentifier": "com.mavix21.plantly"
