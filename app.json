@@ -13,6 +13,14 @@
     "plugins": [
       "expo-router",
       [
+        "expo-font",
+        {
+          "fonts": [
+            "node_modules/@expo-google-fonts/caveat/Caveat_400Regular.ttf"
+          ]
+        }
+      ],
+      [
         "expo-splash-screen",
         {
           "backgroundColor": "#9CF089",
@@ -23,7 +31,8 @@
           },
           "imageWidth": 150
         }
-      ]
+      ],
+      "expo-font"
     ],
     "ios": {
       "bundleIdentifier": "com.mavix21.plantly"
