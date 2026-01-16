@@ -1,9 +1,11 @@
 import * as React from "react";
 import { Alert, ScrollView, Text, TextInput, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useRouter } from "expo-router";
 
 import PlantlyButton from "@/components/PlantlyButton";
 import PlantlyImage from "@/components/PlantlyImage";
+import { usePlantStore } from "@/store/plantStore";
 
 interface NewPlantProps {
   propName: unknown;
@@ -12,6 +14,8 @@ interface NewPlantProps {
 export default function NewPlant({ propName }: NewPlantProps) {
   const [name, setName] = React.useState<string>();
   const [days, setDays] = React.useState<string>();
+  const addPlant = usePlantStore((s) => s.addPlant);
+  const router = useRouter();
 
   const handleSubmit = () => {
     if (!name) {
@@ -32,7 +36,8 @@ export default function NewPlant({ propName }: NewPlantProps) {
       );
     }
 
-    console.log("Adding plant", name, days);
+    addPlant(name, Number(days));
+    router.navigate("../");
   };
 
   return (
