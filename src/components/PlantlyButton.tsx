@@ -5,9 +5,14 @@ import * as Haptics from "expo-haptics";
 interface PlantlyButtonProps {
   title: string;
   onPress: () => void;
+  textCentered?: boolean;
 }
 
-export default function PlantlyButton({ title, onPress }: PlantlyButtonProps) {
+export default function PlantlyButton({
+  title,
+  onPress,
+  textCentered,
+}: PlantlyButtonProps) {
   const handlePress = React.useCallback(() => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     onPress();
@@ -18,7 +23,11 @@ export default function PlantlyButton({ title, onPress }: PlantlyButtonProps) {
       className="bg-primary active:bg-secondary rounded-md px-4.5 py-3 transition-colors"
       onPress={handlePress}
     >
-      <Text className="text-lg font-bold text-white">{title}</Text>
+      <Text
+        className={`text-lg font-bold text-white ${textCentered ? "text-center" : undefined}`}
+      >
+        {title}
+      </Text>
     </Pressable>
   );
 }

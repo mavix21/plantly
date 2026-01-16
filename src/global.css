@@ -8,11 +8,14 @@
 
 @layer theme {
   :root {
+    --color-light-grey: #eee;
+
     @variant dark {
       --color-background: oklch(0.141 0.005 285.823);
       --color-foreground: oklch(0.985 0 0);
       --color-primary: #29b365;
       --color-secondary: #206a42;
+      --color-light-gray: var(--color-light-grey);
     }
 
     @variant light {
@@ -20,6 +23,7 @@
       --color-foreground: oklch(0.141 0.005 285.823);
       --color-primary: #29b365;
       --color-secondary: #206a42;
+      --color-light-gray: var(--color-light-grey);
     }
   }
 }
